@@ -13,10 +13,12 @@ class ROOTMETER_API ATree : public AActor
 	
 public:	
 	ATree();
-	
-	//virtual void Tick(float DeltaTime) override;
+
+	void SetFogEnabled(bool NewFogEnabled);
+	bool GetFogEnabled() const;
 
 protected:
-	//virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tree")
+	bool bIsFogEnabled;
 	
 };

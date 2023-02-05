@@ -6,5 +6,15 @@
 
 ATree::ATree()
 {
+	bIsFogEnabled = true;
 }
 
+void ATree::SetFogEnabled(bool NewFogEnabled)
+{
+	bIsFogEnabled = NewFogEnabled;
+}
+
+bool ATree::GetFogEnabled() const
+{
+	return bIsFogEnabled;
+}

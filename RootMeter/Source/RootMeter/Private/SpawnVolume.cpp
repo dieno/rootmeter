@@ -26,6 +26,7 @@ ASpawnVolume::ASpawnVolume()
 	bSpawnInGame = false;
 	ObstacleMaxScale = FVector::ZeroVector;
 	bSpawnObstacles = true;
+	ClearIgnoreClass = nullptr;
 }
 
 void ASpawnVolume::Tick(float DeltaSeconds)
@@ -252,7 +253,7 @@ void ASpawnVolume::Clear()
 	{
 		for(AActor* Actor : CurrentlySpawnedTrees)
 		{
-			if(IsValid(Actor))
+			if(IsValid(Actor) && !Actor->IsA(ClearIgnoreClass))
 			{
 				Actor->Destroy();
 			}
@@ -265,7 +266,7 @@ void ASpawnVolume::Clear()
 	{
 		for(AActor* Actor : CurrentlySpawnedObstacles)
 		{
-			if(IsValid(Actor))
+			if(IsValid(Actor) && !Actor->IsA(ClearIgnoreClass))
 			{
 				Actor->Destroy();
 			}
@@ -288,7 +289,7 @@ void ASpawnVolume::Clear()
 	{
 		for(AActor* Actor : PreviouslySpawnedActors)
 		{
-			if(IsValid(Actor))
+			if(IsValid(Actor) && !Actor->IsA(ClearIgnoreClass))
 			{
 				Actor->Destroy();
 			}
@@ -301,7 +302,7 @@ void ASpawnVolume::Clear()
 	{
 		for(AActor* Actor : PreviouslySpawnedObstacles)
 		{
-			if(IsValid(Actor))
+			if(IsValid(Actor) && !Actor->IsA(ClearIgnoreClass))
 			{
 				Actor->Destroy();
 			}
