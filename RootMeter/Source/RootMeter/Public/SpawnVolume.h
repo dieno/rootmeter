@@ -19,24 +19,43 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+	virtual void BeginPlay() override;
+
+	virtual void BeginDestroy() override;
+
 protected:
 	UFUNCTION(BlueprintCallable, CallInEditor, Category = "SpawnVolume")
 	void Spawn();
+	
+	UFUNCTION(BlueprintCallable, Category = "SpawnVolume")
+	void SpawnTrees(FRandomStream RandomStream);
+
+	UFUNCTION(BlueprintCallable, Category = "SpawnVolume")
+	void SpawnObstacles();
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category = "SpawnVolume")
 	void Clear();
+
+	UFUNCTION()
+	void DebugDraw();
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
+	int32 Seed = 12345;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
 	int32 NumOfTreesToSpawn;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
-	float AvoidanceRadius;
+	float TreeAvoidanceRadius;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
+	float ObstacleAvoidanceRadius;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
 	float EdgeAvoidanceMargin;
 
-	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
-	// int32 NumOfObstaclesToSpawn;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
+	FVector ObstacleMaxScale;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
 	TSubclassOf<AActor> TreeClass;
@@ -45,12 +64,25 @@ protected:
 	TSubclassOf<AActor> ObstacleClass;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
+	bool bSpawnObstacles;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
+	bool bSpawnInGame;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
 	bool bDebugDraw;
-	
-	UPROPERTY()
-	TArray<AActor*> CurrentlySpawnedActor;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
+	bool bAreTreesSpawned;
 
 	UPROPERTY()
-	TArray<FVector> SpawnedActorPositions;
-	
+	TArray<AActor*> CurrentlySpawnedTrees;
+
+	UPROPERTY()
+	TArray<AActor*> CurrentlySpawnedObstacles;
+
+	UPROPERTY()
+	TArray<FVector> SpawnedActorLocations;
+
+
 };
