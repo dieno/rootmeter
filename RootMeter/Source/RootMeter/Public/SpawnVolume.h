@@ -38,6 +38,9 @@ protected:
 
 	UFUNCTION()
 	void DebugDraw();
+
+	UFUNCTION(BlueprintCallable,Category="SpawnVolume")
+	void SetSpawnSeed(const int32 InSeed) { Seed = InSeed; }
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
 	int32 Seed = 12345;
