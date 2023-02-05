@@ -70,6 +70,9 @@ protected:
 	bool bSpawnInGame;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
+	TSubclassOf<AActor> ClearIgnoreClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
 	bool bDebugDraw;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SpawnVolume")
