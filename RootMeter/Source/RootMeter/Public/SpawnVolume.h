@@ -23,6 +23,9 @@ public:
 
 	virtual void BeginDestroy() override;
 
+	UFUNCTION(BlueprintCallable, Category="Spawn Volume")
+	int32 GetNumOfSpawnedTrees() const {return NumOfTreesToSpawn;}
+
 protected:
 	UFUNCTION(BlueprintCallable, CallInEditor, Category = "SpawnVolume")
 	void Spawn();
