@@ -60,7 +60,7 @@ void ASpawnVolume::BeginDestroy()
 
 void ASpawnVolume::Spawn()
 {
-	Clear();
+	//Clear();
 
 	const FRandomStream RandomStream(Seed);
 	SpawnTrees(RandomStream);
@@ -86,12 +86,12 @@ void ASpawnVolume::SpawnTrees(FRandomStream RandomStream)
 
 	const FBoxSphereBounds VolumeBounds = GetBounds();
 	// Get the bounds of the map
-	FVector MapMin = FVector(-VolumeBounds.BoxExtent.X, -VolumeBounds.BoxExtent.Y, 0.0f);
-	FVector MapMax = FVector(VolumeBounds.BoxExtent.X, VolumeBounds.BoxExtent.Y, 0.0f);
+	FVector MapMin = FVector(-VolumeBounds.BoxExtent.X, -VolumeBounds.BoxExtent.Y, GetActorLocation().Z-VolumeBounds.BoxExtent.Z);
+	FVector MapMax = FVector(VolumeBounds.BoxExtent.X, VolumeBounds.BoxExtent.Y, GetActorLocation().Z-VolumeBounds.BoxExtent.Z);
 
 	// Calculate the adjusted bounds for the random spawning locations
-	FVector AdjustedMin = MapMin + FVector(EdgeAvoidanceMargin, EdgeAvoidanceMargin, 0.0f);
-	FVector AdjustedMax = MapMax - FVector(EdgeAvoidanceMargin, EdgeAvoidanceMargin, 0.0f);
+	FVector AdjustedMin = MapMin + FVector(EdgeAvoidanceMargin, EdgeAvoidanceMargin, 0.f);
+	FVector AdjustedMax = MapMax - FVector(EdgeAvoidanceMargin, EdgeAvoidanceMargin, 0.f);
 
 	FBox SpawnBounds = FBox(AdjustedMin, AdjustedMax);
 	
